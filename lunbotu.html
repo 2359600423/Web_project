@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="box"> 
+        <div class="box1">     
+            <img class="imgs" src="https://img.alicdn.com/imgextra/i2/6000000007573/O1CN01T3WYfj25oU62AChkl_!!6000000007573-0-octopus.jpg" alt="">
+            <img class="imgs" src="https://aecpm.alicdn.com/simba/img/TB1JNHwKFXXXXafXVXXSutbFXXX.jpg" alt="">
+            <img class="imgs" src="https://img.alicdn.com/imgextra/i3/6000000000038/O1CN01A0E2931C9Rk0yD9R8_!!6000000000038-0-octopus.jpg" alt="">
+            <img class="imgs" src="https://aecpm.alicdn.com/simba/img/TB1XotJXQfb_uJkSnhJSuvdDVXa.jpg" alt="">
+            <img class="imgs" src="https://aecpm.alicdn.com/simba/img/TB183NQapLM8KJjSZFBSutJHVXa.jpg" alt="">
+        </div> 
+            <ul>
+            <li class="active   ">1</li>
+            <li class="">2</li>
+            <li class="">3</li>
+            <li class="">4</li>
+            <li class="">5</li>
+        </ul>
+        <a class="left" href="javascript:;"><</a>
+        <a class="right" href="javascript:;">></a>
+    </div>
+
+<script>
+    var li=$("li");
+    var left=$(".left")[0];
+    var right=$(".right")[0];
+    var imgs=$(".box1")[0];
+    var id=1;
+    function red(index){
+        [].forEach.call(li,function(item,i){
+                item.className="";
+                if((i+1)==index){
+                    item.className="active"
+                }
+            });
+            imgs.style.top=-(id-1)*300+"px";
+    }
+    right.onclick=function(){
+        if(id==5){
+            id=1;
+        }else{
+            id++
+        }
+        red(id)
+    };
+    left.onclick=function(){
+        if(id==1){
+            id=5;
+        }else{
+            id--
+        }
+        red(id)
+    };
+    [].forEach.call(li,function(item){
+        item.onclick=function(){
+            console.log(this)
+            id=item.innerHTML;
+            console.log(id)
+            red(id)
+        }
+
+    })
+    setInterval(() => {
+        if(id==5){
+            id=1;
+        }else{
+            id++
+        }
+        red(id)
+    }, 5000);
+
+    function startuniformMove(dom,target){      //匀速运动
+            if(Runsate){
+                run= setInterval(() => {
+                    ispeed=target-dom.offsetLeft > 0?4:-4;
+                    if(Math.abs(target-dom.offsetLeft)<Math.abs(ispeed)){
+                        clearInterval(run);
+                        dom.style.left=target+"px";
+                    }else{
+                        dom.style.left=dom.offsetLeft+ispeed+"px";
+                    }
+            }, 30);
+            Runsate=false;
+            }
+        }
+        function $(){   
+            str="";
+            if(arguments[0][0]=="#"||arguments[0][0]=="."){
+            for(let i=1;i<arguments[0].length;i++){
+                str+=arguments[0][i]
+            }
+            }else{  
+                return document.getElementsByTagName(arguments[0])
+            }
+            switch(arguments[0][0]){
+                case "#":
+                   return document.getElementById(str);
+                case ".":return document.getElementsByClassName(str);
+            }
+        }
+
+
+</script>
+
+</body>
+</html>
